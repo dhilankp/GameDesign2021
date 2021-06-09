@@ -4,7 +4,7 @@
 l1="**************************"
 l2="*       My game          *"
 l3="*                        *"
-l4="*    1 - Level1          *"
+l4="*    1 - Capitalize      *"
 l5="*    2 - Level2          *"
 l6="*    3 - Scores          *"
 l7="*    4 - Exit Game       *"
@@ -32,11 +32,19 @@ def score():
     print("*    3 - ???- 745        *")
     print(l3)
     print(l8)
+def pause():
+    print("Press enter to conginue")
+    input()
 while x !=4:  
     x=menu()
     if(x==1):        #if statement are selection or branching
         print("Level 1 Chosen")
- 
+        print("Please ener a phrase in lower case")
+        answer=input() #input is a function
+        print(answer.capitalize()) #is a method of strings and you have to refered with a dot 
+        answer=answer.capitalize() #update your variable to the new change if I dont need orginal value 
+        print(answer)
+        pause()
     if(x==2):
         print("Level 2 Chosen")
  
