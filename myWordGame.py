@@ -6,6 +6,10 @@
 # give the user some turns
 # show the word to the user with the characters guessed 
 # play the game as long as the user has turns or has guessed the word 
+import time
+import os
+import sys
+os.system('cls')
 l1="********************************"
 l2="*       Word Game              *"
 l3="*                              *"
@@ -14,6 +18,7 @@ l5="*    2 - Print Top Scores      *"
 l6="*    3 - Exit                  *"
 l7="********************************"
 x=1  #global variable
+
 def menu():
     print(l1)
     print(l2)
@@ -26,34 +31,46 @@ def menu():
     inputNumber = input()
     x= int(inputNumber)
     return x
+def printscores():
+    File = open("wordgame.txt", 'r')
+    scoresDisplay = File.read()
+    print(scoresDisplay)
+    input("Enter when you would like to stop viewing scores.")
+    File.close()
+    menu()
+
 name=input("What is your name? ")
 print("Hi", name, "here is the menu!")
 score=0
-while x !=3:  
-    x=menu()
-    if(x==1): 
-        import random
-        gameWords=['broncos','cheifs','raiders','chargers','seahawks','cardinals', 'rams', '49ers']
-        answer=input("Do you want to guess a word? ")
-        answer=answer.upper()
-        def updateWord(word):
-            for char in word:
-                if char in guesses:
-                    print(char, end=' ')
-                else:
-                    print('_', end=' ')
-        while 'Y'in answer: 
-            print ("Good luck", name, "!")
-            word=random.choice(gameWords)
-            counter=len(word)                                                                     
-            print("There are",counter, "letters in the word")
-            turns=10 #should we consider controlling this number when he/she misses
-            guesses= ''
-            updateWord(word)
-            answer='changed'
+
+x=menu()
+if(x==1): 
+    import random
+    gameWords=['broncos','cheifs','raiders','chargers','seahawks','cardinals', 'rams', '49ers']
+    answer=input("Do you want to guess a word? ")
+    answer=answer.upper()
+    def updateWord(word):
+        for char in word:
+            if char in guesses:
+                print(char, end=' ')
+            else:
+                print('_', end=' ')
+    while 'Y'in answer: 
+        print ("Good luck", name, "!")
+        word=random.choice(gameWords)
+        counter=len(word)                                                                     
+        print("There are",counter, "letters in the word")
+        turns=10 #should we consider controlling this number when he/she misses
+        guesses= ''
+        updateWord(word)
+    
         while turns>0 and counter>0:
             
             newGuess=input("\n\n Give me a letter ")
+            if newGuess in guesses:
+                print("This letter has already been guessed")
+                updateWord(word)
+                continue
             if newGuess not in word:
                 turns-=1 #turns=turns -1
                 print ("Wrong! You have" , turns, "guesses left")
@@ -73,10 +90,26 @@ while x !=3:
                 guesses= ''
                 updateWord(word)
         while counter !=0:
-            print("oops! you ran out of guesses! Your final score was",score,)        
+            print("oops! you ran out of guesses! Your final score was",score,)       
             break
-    x=input("To play again push 1")
-        
+        File=open("wordgame.txt", 'a')
+        import datetime as dt
+        date = dt.date.today()
+        line= name+ " had a score of " + str(score)+ " on "+ str(date)
+        File.write(line)
+        File.write("\n")
+        File.close() 
+        answer=input("Would you like to play again?").upper()
+             
+
+
+    
+if(x==2):
+    printscores()
+
+
+
+    
 
 if(x==3):
     print (name, "Thank you for playing!")
