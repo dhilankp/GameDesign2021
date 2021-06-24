@@ -26,7 +26,7 @@ LetterFont=pygame.font.SysFont("comicsans",40)
 
 def display_message(message):
     pygame.time.delay(500)
-    screen.fill(CYAN)) 
+    screen.fill(CYAN)
     text = WordFont.render(message, 1, BLACK)
     screen.blit(text, (WIDTH/2 - text.get_width()/2, HEIGHT/2 - text.get_height()/2))
     pygame.display.update()
