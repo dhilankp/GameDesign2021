@@ -44,14 +44,17 @@ class Paddle(pygame.sprite.Sprite):
         if self.rect.x < 399:
           self.rect.x = 399
     def moveDownlv3(self, pixles):
+        #Check that the bigger paddle does not go too far (off the screen)      
         self.rect.y+= pixles
         if self.rect.y > 200:
           self.rect.y = 200
     def moveDownlv1(self, pixles):
+      #Check that the bigger paddle does not go too far (off the screen)   
         self.rect.y+= pixles
         if self.rect.y > 600:
           self.rect.y = 600 
     def moveDownlv2(self, pixles):
+      #Check that the bigger paddle does not go too far (off the screen)   
         self.rect.y+= pixles
         if self.rect.y > 450:
           self.rect.y = 450 
